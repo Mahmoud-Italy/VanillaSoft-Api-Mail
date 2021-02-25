@@ -4,14 +4,12 @@ $router->get('/', function () use ($router) {
     return $router->app->version();
 });
 
-# API v1 created at December, 2020
-$router->group(['prefix' => 'v1'], function($router) {
-
-    /** Reports **/
-    $router->get('/reports', 'ReportController@index');
-    $router->get('/pieChart', 'ReportController@pieChart');
-    $router->get('/lineChart/{type}', 'ReportController@lineChart');
-    $router->get('/barChart', 'ReportController@barChart');
+# API v1 created at February, 2021
+$router->group(['prefix' => 'v1','middleware' => 'apiToken'], function($router) {
+    $router->get('inbox', 'InboxController@index');
+    $router->get('inbox/{id}', 'InboxController@show');
+    $router->post('inbox', 'InboxController@store');
+    $router->delete('inbox/{id}', 'InboxController@destroy');
 });
 
 
