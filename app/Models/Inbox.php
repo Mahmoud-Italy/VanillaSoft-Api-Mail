@@ -59,7 +59,7 @@ class Inbox extends Model
     public function enqueue($row)
     {
         $emailJob = (new SendEmail($row))->delay(Carbon::now()->addMinutes(1)); // delay 1min
-        dispatch($emailJob);
+        dispatchNow($emailJob);
     }
 
 }
